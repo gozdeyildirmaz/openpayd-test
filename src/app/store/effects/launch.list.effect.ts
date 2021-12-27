@@ -21,10 +21,10 @@ export class LaunchEffects {
       ofType(loadLaunchList),
       switchMap(() =>
         this.pastLaunchesService.fetch({ limit: 30 }).pipe(
-          map((response: any) =>
-            loadLaunchListSuccess({
+          map((response: any) =>{
+            return loadLaunchListSuccess({
               payload: response.data.launchesPast as any
-            })
+            })}
           ),
           catchError(error => of(loadLaunchListFail(error)))
         )

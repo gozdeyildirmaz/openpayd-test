@@ -3,7 +3,7 @@ import { map } from "rxjs/operators";
 import { PastLaunchesListGQL } from "./spacexGraphql.service";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { loadLaunchList } from "../store/actions";
+import { loadLaunchList, loadLaunchDetail } from "../store/actions";
 import * as launchListQuery from "../store/selectors";
 
 @Injectable({
@@ -12,6 +12,7 @@ import * as launchListQuery from "../store/selectors";
 export class LaunchFacadeService {
   launchListState$ = this.store.select(launchListQuery.getLaunchListState);
   launchList$ = this.store.select(launchListQuery.getLaunchList);
+  launchDetail$ = this.store.select(launchListQuery.getLaunchDetail);
   launchListLoaded$ = this.store.select(launchListQuery.getLaunchListLoaded);
   launchListLoading$ = this.store.select(launchListQuery.getLaunchListLoading);
 
@@ -23,6 +24,11 @@ export class LaunchFacadeService {
   pastLaunchListStoreCache() {
     this.store.dispatch(loadLaunchList());
     return this.launchList$;
+  }
+
+  launchDetailStoreCache(param) {
+    this.store.dispatch(loadLaunchDetail(param));
+    return this.launchDetail$;
   }
 
   pastLaunchListFacade() {
