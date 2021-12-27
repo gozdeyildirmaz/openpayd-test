@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   it(`should have as title 'angular-spacex-graphql-codegen'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular-spacex-graphql-codegen');
+    expect(app.title).toContain('angular-spacex-graphql-codegen');
   });
 
   it('should render title', () => {

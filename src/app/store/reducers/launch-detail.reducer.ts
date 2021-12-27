@@ -9,7 +9,7 @@ import {
 export type LaunchDetailState = any;
 
 const initialState: LaunchDetailState = {
-  data: [],
+  data: null,
   loaded: false,
   loading: false,
   error: null

@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-spacex-graphql-codegen';
+  title = 'angular-spacex-graphql-codegen app is running!';
   test = new Date();
 }
