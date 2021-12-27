@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { map, switchMap } from "rxjs/operators";
-import { LaunchDetailsGQL } from "../services/spacexGraphql.service";
+import {Component, ChangeDetectionStrategy} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {map, switchMap} from "rxjs/operators";
+import {LaunchDetailsGQL} from "../services/spacexGraphql.service";
+import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {Location} from '@angular/common';
 
 @Component({
   selector: "app-launch-details",
@@ -12,12 +14,37 @@ import { LaunchDetailsGQL } from "../services/spacexGraphql.service";
 export class LaunchDetailsComponent {
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly launchDetailsService: LaunchDetailsGQL
-  ) {}
+    private readonly launchDetailsService: LaunchDetailsGQL,
+    private location: Location
+  ) {
+  }
 
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  currentIndex = -1;
+  maxIndex;
   launchDetails$ = this.route.paramMap.pipe(
     map(params => params.get("id") as string),
-    switchMap(id => this.launchDetailsService.fetch({ id })),
-    map(res => res.data.launch)
+    switchMap(id => this.launchDetailsService.fetch({id})),
+    map(res => {
+      this.maxIndex = res.data.launch.links.flickr_images.length - 1;
+      return res.data.launch
+    })
   );
+
+  goBack() {
+    this.location.back();
+  }
+
+  goLeft() {
+    if (this.currentIndex > -1)
+      this.currentIndex--;
+  }
+
+  goRight() {
+    if (this.currentIndex < this.maxIndex && this.maxIndex - this.currentIndex >1) {
+      this.currentIndex++;
+    }
+
+  }
 }

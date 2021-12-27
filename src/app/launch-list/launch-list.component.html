@@ -2,7 +2,7 @@
   <main>
     <section class="container">
       <mat-card
-        *ngFor="let launch of pastLaunches"
+        *ngFor="let launch of pastLaunchesMapped; index as i"
         [routerLink]="['/', launch.id]"
       >
         <mat-card-header>
@@ -17,7 +17,7 @@
           <mat-card-title>{{ launch.mission_name }}</mat-card-title>
           <mat-card-subtitle
             >{{ launch.rocket.rocket_name }} - launched
-            {{ launch.launch_date_utc }}</mat-card-subtitle
+            {{  launch.launch_date_utc }}</mat-card-subtitle
           >
         </mat-card-header>
         <img
@@ -26,8 +26,17 @@
           mat-card-image
           loading="lazy"
           [src]="launch.links.flickr_images[0]"
+          (load)="imageLoaded(i)"
+          (error)="imageNotLoaded(i);"
+          onerror="this.onerror=null;this.src='https://media.istockphoto.com/vectors/thumbnail-image-vector-graphic-vector-id1147544807?k=20&m=1147544807&s=612x612&w=0&h=pBhz1dkwsCMq37Udtp9sfxbjaMl27JUapoyYpQm0anc=';"
           alt="Photo of {{ launch.mission_name }}"
         />
+        <mat-progress-spinner *ngIf="loadedArray.indexOf(i) == -1"
+          class="spinner"
+          [color]="color"
+          [mode]="mode"
+          [value]="value">
+        </mat-progress-spinner>
       </mat-card>
     </section>
   </main>

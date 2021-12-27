@@ -1,29 +1,54 @@
 <ng-container *ngIf="launchDetails$ | async as launchDetails">
-  <section style="padding-top: 20px;">
-    <mat-card style="width: 400px; margin: auto;">
-      <mat-card-header>
-        <mat-card-title>{{ launchDetails.mission_name }}</mat-card-title>
-      </mat-card-header>
-      <img
-        height="256"
-        width="256"
-        mat-card-image
-        [src]="launchDetails.links.mission_patch"
-        alt="Mission patch of {{ launchDetails.mission_name }}"
-      />
-      <mat-card-content>
-        <p>{{ launchDetails.details }}</p>
-      </mat-card-content>
-    </mat-card>
-  </section>
-  <section class="photo-grid">
-    <img
-      *ngFor="let pic of launchDetails.links.flickr_images"
-      [src]="pic"
-      alt="Picture of {{ launchDetails.mission_name }}"
-      height="300"
-      width="300"
-      loading="lazy"
-    />
-  </section>
+  <div class="page-wrapper">
+    <div class="detail-header">
+      <fa-icon (click)="goBack()" [icon]="faChevronLeft" size="4x"></fa-icon>
+      <h1>{{ launchDetails.mission_name }}</h1>
+    </div>
+    <div class="wrapper">
+      <div clas="wapper-detail">
+        <mat-card style="width: 400px; margin: auto;">
+          <img
+            class="detail-image-circle"
+            height="256"
+            width="256"
+            mat-card-image
+            [src]="launchDetails.links.mission_patch"
+            onerror="this.onerror=null;this.src='https://media.istockphoto.com/vectors/thumbnail-image-vector-graphic-vector-id1147544807?k=20&m=1147544807&s=612x612&w=0&h=pBhz1dkwsCMq37Udtp9sfxbjaMl27JUapoyYpQm0anc=';"
+            alt="Mission patch of {{ launchDetails.mission_name }}"
+          />
+          <mat-card-content>
+            <p>{{ launchDetails.details }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div clas="wapper-slider" *ngIf="launchDetails.links.flickr_images.length">
+        <div class="presentaion" >
+          <img
+            [src]="launchDetails.links.flickr_images[currentIndex + 1]"
+            alt="Picture of {{ launchDetails.mission_name }}"
+            height="387"
+            width="580"
+            loading="lazy"
+            class="image-preview"
+          />
+        </div>
+        <div class="slider">
+          <fa-icon (click)="goLeft()" [icon]="faChevronLeft" size="3x"></fa-icon>
+          <div class="image-wrapper">
+            <img
+              *ngFor="let pic of launchDetails.links.flickr_images; index as i"
+              [src]="pic"
+              alt="Picture of {{ launchDetails.mission_name }}"
+              height="120"
+              width="180"
+              loading="lazy"
+              class="slider-item" [ngClass]="{'invisible' : i <= currentIndex}"
+            />
+          </div>
+          <fa-icon (click)="goRight()" [icon]="faChevronRight" size="3x"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </ng-container>

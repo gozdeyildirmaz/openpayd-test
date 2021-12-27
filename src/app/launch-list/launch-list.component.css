@@ -8,4 +8,11 @@
 
 .mat-card {
   cursor: pointer;
+  position: relative !important;
+}
+.spinner {
+  margin: 0 10px;
+  position: absolute !important;
+  top:200px;
+  left:110px;
 }
