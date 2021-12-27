@@ -37,6 +37,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatProgressSpinnerModule,
     FontAwesomeModule
   ],
+  exports: [
+    FontAwesomeModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

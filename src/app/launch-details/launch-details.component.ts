@@ -6,6 +6,7 @@ import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {Location} from '@angular/common';
 import {LaunchFacadeService} from "../services/launch-facade.service";
 
+
 @Component({
   selector: "app-launch-details",
   templateUrl: "./launch-details.component.html",
