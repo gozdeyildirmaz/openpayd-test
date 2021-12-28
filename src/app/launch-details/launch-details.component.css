@@ -18,10 +18,16 @@ fa-icon:hover{
   justify-content: space-around;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .wrapper > * {
   flex-basis: 50%;
+}
+
+.wrapper-detail{
+  margin-bottom: 20px;
+
 }
 
 .detail-image-circle {
@@ -80,4 +86,18 @@ fa-icon:hover{
 
 .image-preview{
   margin-left: 40px;
+}
+
+@media screen and (max-width: 768px) {
+ .wrapper-slider{
+   transform: scale(0.7);
+ }
+  .detail-header{
+    margin-left: 0px;
+  }
+
+  .wrapper-detail{
+    margin-bottom: 0px;
+  }
+
 }
