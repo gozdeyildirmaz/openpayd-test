@@ -41,4 +41,8 @@ describe('LaunchListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  afterEach(() => {
+    fixture.destroy();
+  });
 });
